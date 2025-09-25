@@ -1,26 +1,39 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace myGuestBook {
     
     class Guest {
-        public string guest; // Gästen
-        public string message; // Meddelandet
+        public string guest {get; set;} = ""; // Gästen, property istället för fält
+        public string message {get; set;} = ""; // Meddelandet, property istället för fält
 
+        public Guest() {} // Tom standardkonstruktör för JSON-omvandling
         public Guest(string guest, string message) // Slå ihop namn med meddelandet
         {
-            this.guest = guest; // Spara gästens namn i fältet
-            this.message = message; // Spara meddelandet i fältet
+            this.guest = guest; // Spara gästens namn
+            this.message = message; // Spara meddelandet
         }
     }
     class GuestBook {
+        
+        // Lista som håller alla inlägg
+        static List<Guest> guests = new List<Guest>();
+        // Filväg där inläggen i gästboken sparas som JSON
+        static string filePath = "guestbook.json";
         public static void Main(string[] args)
     {
+        // Läs in tidigare inlägg om filen finns
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            // Läs in gästbok och omvandla JSON från filen tillbaka till listan med objekt
+            guests = JsonSerializer.Deserialize<List<Guest>>(json) ?? new List<Guest>();
+        }
         
         while (true)
         {
-        Console.Clear(); // Rensa skärmen så menyn skrivs ut på nytt varje gång
         Console.WriteLine("Gästbok");
         Console.WriteLine("Välj ett alternativ: ");
         Console.WriteLine("1. Lägg till inlägg");
@@ -55,10 +68,19 @@ namespace myGuestBook {
 
             // Slå ihop namn och meddelande och skriv ut det i konsollen
             var newGuest = new Guest(name, message);
+            guests.Add(newGuest);
+
+            // Spara och omvandla inlägg till fil
+            string json = JsonSerializer.Serialize(guests, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, json);
+
             Console.WriteLine(); // Tom rad
             Console.WriteLine($"Tack för ditt besök {newGuest.guest}, ditt meddelande är sparat:");
             Console.WriteLine(newGuest.message);
-        
+            Console.WriteLine(); 
+            Console.WriteLine("Tryck Enter för att återgå till menyn.");
+            Console.ReadLine(); // Väntar på att användaren trycker Enter
+            Console.Clear(); // Rensa skärmen
         }
         // Alternativ 2 - Ta bort inlägg
         if (choice == "2") {
