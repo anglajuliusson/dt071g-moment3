@@ -3,7 +3,10 @@ using System;
 using System.Net.Http.Headers;
 
 namespace myGuestBook {
-
+    
+    class Guest {
+        
+    }
     class GuestBook {
 
     }
