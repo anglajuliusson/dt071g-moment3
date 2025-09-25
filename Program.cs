@@ -15,6 +15,27 @@ namespace myGuestBook {
         }
     }
     class GuestBook {
+        public static void Main(string[] args)
+    {
+        // Fråga efter namn
+        Console.WriteLine("Ange ditt namn:");
+        var name = Console.ReadLine();
 
+        if (string.IsNullOrWhiteSpace(name)) // Kontrollerar att användaren skrivit något
+        {
+        Console.WriteLine("Fel: Inget namn angivet.");
+        return; // Om felkod stoppa koden
+        }
+        
+        // Fråga efter meddelande
+        Console.WriteLine("Skriv något om ditt besök:");
+        var message = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(message)) // Kontrollerar att användaren skrivit något
+        {
+        Console.WriteLine("Fel: Inget meddelande angivet.");
+        return; // Om felkod stoppa koden
+        }
+    }
     }
 }
