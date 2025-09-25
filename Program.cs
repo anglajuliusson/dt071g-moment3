@@ -17,6 +17,23 @@ namespace myGuestBook {
     class GuestBook {
         public static void Main(string[] args)
     {
+        
+        while (true)
+        {
+        Console.Clear(); // Rensa skärmen så menyn skrivs ut på nytt varje gång
+        Console.WriteLine("Gästbok");
+        Console.WriteLine("Välj ett alternativ: ");
+        Console.WriteLine("1. Lägg till inlägg");
+        Console.WriteLine("2. Ta bort inlägg");
+        Console.WriteLine("3. Visa alla inlägg");
+        Console.WriteLine("4. Avsluta");
+
+        var choice = Console.ReadLine(); // Val av alternativ
+
+        if (choice == "4") break; // Avsluta program
+        // Annars kör funktion beroende på val
+}
+
         // Fråga efter namn
         Console.WriteLine("Ange ditt namn:");
         var name = Console.ReadLine();
