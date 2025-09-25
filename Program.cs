@@ -37,8 +37,8 @@ namespace myGuestBook {
         Console.WriteLine("Gästbok");
         Console.WriteLine("Välj ett alternativ: ");
         Console.WriteLine("1. Lägg till inlägg");
-        Console.WriteLine("2. Ta bort inlägg");
-        Console.WriteLine("3. Visa alla inlägg");
+        Console.WriteLine("2. Visa alla inlägg");
+        Console.WriteLine("3. Ta bort inlägg");
         Console.WriteLine("4. Avsluta");
 
         var choice = Console.ReadLine(); // Val av alternativ
@@ -82,12 +82,8 @@ namespace myGuestBook {
             Console.ReadLine(); // Väntar på att användaren trycker Enter
             Console.Clear(); // Rensa skärmen
         }
-        // Alternativ 2 - Ta bort inlägg
+        // Alternativ 2 - Visa alla inlägg
         if (choice == "2") {
-
-        } 
-        // Alternativ 3 - Visa alla inlägg
-        if (choice == "3") {
             Console.WriteLine("Alla inlägg i gästboken:");
 
             if (guests.Count > 0) { // Om det finns inlägg att visa
@@ -103,6 +99,10 @@ namespace myGuestBook {
             Console.ReadLine(); // Väntar på att användaren trycker Enter
             Console.Clear(); // Rensa skärmen
         }
+        // Alternativ 3 - Ta bort inlägg
+        if (choice == "3") {
+
+        } 
         // Alternativ 4 - Avsluta program
         if (choice == "4") break;
     }
