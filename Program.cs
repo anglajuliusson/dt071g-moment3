@@ -101,8 +101,40 @@ namespace myGuestBook {
         }
         // Alternativ 3 - Ta bort inlägg
         if (choice == "3") {
+            Console.WriteLine("Välj inlägg att ta bort");
 
-        } 
+            // Visa inläggen
+            if (guests.Count > 0) { // Om det finns inlägg att visa
+                // Loopa igenom listan så att varje objekt skrivs ut
+                for (int i = 0; i < guests.Count; i++) {
+                     Console.WriteLine($"{i + 1}. {guests[i].guest}: {guests[i].message}");
+                }
+            Console.WriteLine("Nummer på inlägg att ta bort: ");
+            var number = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(number)) // Kontrollerar att användaren skrivit något
+            {
+            Console.WriteLine("Fel: Inget nummer angivet.");
+            }
+            if (int.TryParse(number, out int index) && index > 0 && index <= guests.Count) {
+                guests.RemoveAt(index - 1); // Ta bort valt inlägg
+
+                // Spara listan igen efter borttagning
+                string json = JsonSerializer.Serialize(guests, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, json);
+
+                Console.WriteLine("Inlägget har tagits bort!");
+            } else {
+                Console.WriteLine("Felaktigt nummer");
+            }
+        } else {
+            Console.WriteLine("Det finns inga inlägg att ta bort");
+        }
+        Console.WriteLine(); 
+        Console.WriteLine("Tryck Enter för att återgå till menyn.");
+        Console.ReadLine();
+        Console.Clear();
+        }
         // Alternativ 4 - Avsluta program
         if (choice == "4") break;
     }
