@@ -85,11 +85,24 @@ namespace myGuestBook {
         // Alternativ 2 - Ta bort inlägg
         if (choice == "2") {
 
+        } 
         // Alternativ 3 - Visa alla inlägg
-        } 
         if (choice == "3") {
+            Console.WriteLine("Alla inlägg i gästboken:");
 
-        } 
+            if (guests.Count > 0) { // Om det finns inlägg att visa
+                // Loopa igenom listan så att varje objekt skrivs ut
+                for (int i = 0; i < guests.Count; i++) {
+                     Console.WriteLine($"{i + 1}. {guests[i].guest}: {guests[i].message}");
+                }
+            } else { // Inga inlägg att visa
+                Console.WriteLine("Det finns inga inlägg att visa");
+            }
+            Console.WriteLine(); 
+            Console.WriteLine("Tryck Enter för att återgå till menyn.");
+            Console.ReadLine(); // Väntar på att användaren trycker Enter
+            Console.Clear(); // Rensa skärmen
+        }
         // Alternativ 4 - Avsluta program
         if (choice == "4") break;
     }
